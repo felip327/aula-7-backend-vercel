@@ -10,23 +10,25 @@ router.get('/', async (req, res, next) => {
         .order('id', { ascending: true });
 
         if (error) {
-            throw error
+            throw error;
         }
         res.json(data);
     } catch (err) {
-        next(err)
+        next(err);
     }
-    
 });
 
 router.post('/', async (req, res, next) => {
-    try{
-        const { data, error } = await supabase
+    try {
+        // CORREÇÃO AQUI: alterado de 'supabase' para 'db.supabase'
+        const { data, error } = await db.supabase
         .from('categorias')
         .insert([{ nome: req.body.nome }])
-        .select()
+        .select();
 
-        if (error) throw error
+        if (error) {
+            throw error;
+        }
 
         res.status(201).json(data[0]);
     } catch (err) {
