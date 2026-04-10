@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../data/database');
+const supabase = require('../data/supabase');
 
 router.get('/', async (req, res, next) => {
     try {
-        const { data, error } = await db.supabase
+        const { data, error } = await supabase
         .from('categorias')
         .select('*')
         .order('id', { ascending: true });
@@ -20,8 +20,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        // CORREÇÃO AQUI: alterado de 'supabase' para 'db.supabase'
-        const { data, error } = await db.supabase
+        const { data, error } = await supabase
         .from('categorias')
         .insert([{ nome: req.body.nome }])
         .select();
