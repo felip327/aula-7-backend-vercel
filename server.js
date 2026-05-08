@@ -52,9 +52,11 @@ app.get('/', (req, res) => {
 // Importamos os arquivos de rota da pasta /routes
 const rotasCategorias = require('./routes/categorias');
 const rotasProdutos = require('./routes/produtos');
+const rotasPedidos = require('./routes/pedidos');
 
 app.use('/api/categorias', rotasCategorias);
 app.use('/api/produtos', rotasProdutos);
+app.use('/api/pedidos', rotasPedidos);
 app.use((req, res, next) => {
     res.status(404).json({
         sucesso: false,
